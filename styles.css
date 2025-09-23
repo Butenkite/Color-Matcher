@@ -33,3 +33,7 @@ body {
   background-color: rgb(170, 170, 170);
   scale: 110%;
 }
+
+#reset-btn {
+  display: none;
+}
