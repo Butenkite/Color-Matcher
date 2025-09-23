@@ -13,4 +13,31 @@ function generateTable(difficulty){
     easybtn.style.display = 'none';
     mediumbtn.style.display = 'none';
     hardbtn.style.display = 'none';
+    letterLogicEasy();
+}
+
+function letterLogicEasy(){
+    var possibleLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    var selected = [];
+    var letters = [];
+    while(selected.length <= 15){
+        let random = Math.floor(Math.random() * (16));
+        if(!selected.includes(random)){
+            selected.push(random);
+        }
+    }
+    selected.forEach(number => {
+        letters.push(possibleLetters[number]);
+    });
+    console.log(letters);
+}
+
+function letterLogicMedium(){
+
+    var possibleLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'];
+
+}
+
+function letterLogicHard(){
+
 }
