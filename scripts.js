@@ -137,6 +137,8 @@ window.addEventListener("load", () => {
 });
 
 function resetBtnFunc() {
+  timesClicked = 0;
+  counter.textContent = "";
   testBtn.style.display = "inline";
   easyBtn.style.display = "inline";
   gameTable.style.backgroundColor = "";
