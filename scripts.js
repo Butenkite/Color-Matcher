@@ -5,10 +5,12 @@ let mediumBtn = document.getElementById("medium-btn");
 let hardBtn = document.getElementById("hard-btn");
 let resetBtn = document.getElementById("reset-btn");
 const gameTable = document.getElementById("game-table");
+const counter = document.getElementById("counter");
 let secondClick = false;
 let firstBtn = null;
 let solved = 0;
 let totalNeeded = 0;
+let timesClicked = 0;
 
 function letterLogic(difficulty) {
   let possibleLetters = [
@@ -107,12 +109,11 @@ mediumBtn.addEventListener("click", function () {
 });
 hardBtn.addEventListener("click", function () {
   generateTable(8);
-  totalNeeded = 64;
+  totalNeeded = 66;
 });
 resetBtn.addEventListener("click", () => resetBtnFunc());
 
 cheatBtn.addEventListener("click", () => {
-  console.log("cheat button");
   const allBtn = gameTable.querySelectorAll(".unsolved");
   allBtn.forEach((button) => {
     button.style.color = "rgba(160, 159, 159, 1)";
@@ -129,6 +130,8 @@ cheatBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("load", () => {
+  gameTable.textContent = "";
+  counter.textContent = "";
   cheatBtn.style.display = "none";
   resetBtn.style.display = "none";
 });
@@ -148,7 +151,6 @@ function resetBtnFunc() {
 function generateTable(difficulty) {
   letterArray = [];
   letterPos = 0;
-  gameTable.textContent = "";
   testBtn.style.display = "none";
   easyBtn.style.display = "none";
   mediumBtn.style.display = "none";
@@ -185,6 +187,7 @@ function generateTable(difficulty) {
 }
 
 function btnChecked(curBtn) {
+  timesClicked++;
   if (!secondClick) {
     secondClick = true;
     firstBtn = curBtn;
@@ -218,7 +221,12 @@ function btnChecked(curBtn) {
       secondClick = false;
       solved += 2;
       if (totalNeeded == solved) {
-        gameTable.style.backgroundColor = "rgba(94, 170, 92, 1)";
+        const allBtn = gameTable.querySelectorAll(".grid-btn");
+        allBtn.forEach((button) => {
+          button.style.backgroundColor = "rgba(94, 170, 92, 1)";
+        });
+        gameTable.style.backgroundColor = "green";
+          counter.innerHTML = "Times Clicked: " + timesClicked;
       }
     }
   }
