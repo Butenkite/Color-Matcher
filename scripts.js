@@ -125,8 +125,18 @@ function generateTable(difficulty) {
   for (let i = 0; i < difficulty; i++) {
     let newRow = document.createElement("TR");
     for (let j = 0; j < difficulty; j++) {
-      let cell = document.createElement("TD");
-      cell.textContent = letterArray[letterPos++];
+      let cell = document.createElement("td");
+
+      let btn = document.createElement("button");
+      btn.textContent = letterArray[letterPos++];
+      btn.classList.add("btn");
+      btn.classList.add("grid-btn");
+
+      btn.addEventListener("click", () =>
+        console.log("Clicked:", btn.textContent)
+      );
+
+      cell.appendChild(btn);
       newRow.appendChild(cell);
     }
     gameTable.appendChild(newRow);
