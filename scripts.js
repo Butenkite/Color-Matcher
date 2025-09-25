@@ -88,8 +88,6 @@ function letterLogic(difficulty) {
 
 function letterLogicHard() {}
 
-console.log("hello");
-
 easyBtn.addEventListener("click", function () {
   generateTable(4);
 });
@@ -132,9 +130,10 @@ function generateTable(difficulty) {
       btn.classList.add("btn");
       btn.classList.add("grid-btn");
 
-      btn.addEventListener("click", () =>
-        console.log("Clicked:", btn.textContent)
-      );
+      btn.addEventListener("click", () => {
+        console.log("Clicked:", btn.textContent);
+        btn.style.color = "black";
+      });
 
       cell.appendChild(btn);
       newRow.appendChild(cell);
