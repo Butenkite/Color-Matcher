@@ -1,4 +1,5 @@
 let testBtn = document.getElementById("test-btn");
+let cheatBtn = document.getElementById("cheat-btn");
 let easyBtn = document.getElementById("easy-btn");
 let mediumBtn = document.getElementById("medium-btn");
 let hardBtn = document.getElementById("hard-btn");
@@ -110,7 +111,25 @@ hardBtn.addEventListener("click", function () {
 });
 resetBtn.addEventListener("click", () => resetBtnFunc());
 
+cheatBtn.addEventListener("click", () => {
+  console.log("cheat button")
+      const allBtn = gameTable.querySelectorAll(".grid-btn");
+      allBtn.forEach((button) => {
+        button.style.color = "rgba(160, 159, 159, 1)";
+      });
+
+      setTimeout(() => { 
+        allBtn.forEach((button) => {
+        button.style.color = "rgb(216, 216, 216)";
+      }); 
+    }, 800);
+
+    firstBtn = null;
+    secondClick = false;
+});
+
 window.addEventListener("load", () => {
+  cheatBtn.style.display = "none";
   resetBtn.style.display = "none";
 });
 
@@ -121,9 +140,12 @@ function resetBtnFunc() {
   mediumBtn.style.display = "inline";
   hardBtn.style.display = "inline";
   gameTable.textContent = "";
+  cheatBtn.style.display = "none";
   resetBtn.style.display = "none";
   solved = 0;
 }
+
+
 
 function generateTable(difficulty) {
   letterArray = [];
@@ -133,6 +155,7 @@ function generateTable(difficulty) {
   easyBtn.style.display = "none";
   mediumBtn.style.display = "none";
   hardBtn.style.display = "none";
+  cheatBtn.style.display = "inline";
   resetBtn.style.display = "inline";
 
   letterArray = letterLogic(difficulty);
