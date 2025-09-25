@@ -1,3 +1,4 @@
+let testBtn = document.getElementById("test-btn");
 let easyBtn = document.getElementById("easy-btn");
 let mediumBtn = document.getElementById("medium-btn");
 let hardBtn = document.getElementById("hard-btn");
@@ -5,6 +6,8 @@ let resetBtn = document.getElementById("reset-btn");
 const gameTable = document.getElementById("game-table");
 let secondClick = false;
 let firstBtn = null;
+let solved = 0;
+let totalNeeded = 0;
 
 function letterLogic(difficulty) {
   let possibleLetters = [
@@ -88,16 +91,22 @@ function letterLogic(difficulty) {
   return letters;
 }
 
-function letterLogicHard() {}
+testBtn.addEventListener("click", function () {
+  generateTable(2);
+  totalNeeded = 4;
+});
 
 easyBtn.addEventListener("click", function () {
   generateTable(4);
+  totalNeeded = 16;
 });
 mediumBtn.addEventListener("click", function () {
   generateTable(6);
+  totalNeeded = 36;
 });
 hardBtn.addEventListener("click", function () {
   generateTable(8);
+  totalNeeded = 64;
 });
 resetBtn.addEventListener("click", () => resetBtnFunc());
 
@@ -106,16 +115,21 @@ window.addEventListener("load", () => {
 });
 
 function resetBtnFunc() {
+  testBtn.style.display = "inline";
   easyBtn.style.display = "inline";
+  gameTable.style.backgroundColor = "";
   mediumBtn.style.display = "inline";
   hardBtn.style.display = "inline";
   gameTable.textContent = "";
+  resetBtn.style.display = "none";
+  solved = 0;
 }
 
 function generateTable(difficulty) {
   letterArray = [];
   letterPos = 0;
   gameTable.textContent = "";
+  testBtn.style.display = "none";
   easyBtn.style.display = "none";
   mediumBtn.style.display = "none";
   hardBtn.style.display = "none";
@@ -166,6 +180,10 @@ function btnChecked(curBtn) {
     } else {
       firstBtn = null;
       secondClick = false;
+      solved += 2;
+      if(totalNeeded == solved){
+        gameTable.style.backgroundColor = "rgba(94, 170, 92, 1)"
+      }
     }
   }
 }

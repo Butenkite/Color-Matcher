@@ -43,3 +43,7 @@ body {
   height: 50px;
   color: rgb(216, 216, 216);
 }
+
+#game-table{
+  border-radius: 5px;
+}
