@@ -112,20 +112,20 @@ hardBtn.addEventListener("click", function () {
 resetBtn.addEventListener("click", () => resetBtnFunc());
 
 cheatBtn.addEventListener("click", () => {
-  console.log("cheat button")
-      const allBtn = gameTable.querySelectorAll(".grid-btn");
-      allBtn.forEach((button) => {
-        button.style.color = "rgba(160, 159, 159, 1)";
-      });
+  console.log("cheat button");
+  const allBtn = gameTable.querySelectorAll(".unsolved");
+  allBtn.forEach((button) => {
+    button.style.color = "rgba(160, 159, 159, 1)";
+  });
 
-      setTimeout(() => { 
-        allBtn.forEach((button) => {
-        button.style.color = "rgb(216, 216, 216)";
-      }); 
-    }, 800);
+  setTimeout(() => {
+    allBtn.forEach((button) => {
+      button.style.color = "rgb(216, 216, 216)";
+    });
+  }, 800);
 
-    firstBtn = null;
-    secondClick = false;
+  firstBtn = null;
+  secondClick = false;
 });
 
 window.addEventListener("load", () => {
@@ -144,8 +144,6 @@ function resetBtnFunc() {
   resetBtn.style.display = "none";
   solved = 0;
 }
-
-
 
 function generateTable(difficulty) {
   letterArray = [];
@@ -171,6 +169,7 @@ function generateTable(difficulty) {
 
       btn.classList.add("btn");
       btn.classList.add("grid-btn");
+      btn.classList.add("unsolved");
 
       btn.addEventListener("click", () => {
         console.log("Clicked:", btn);
@@ -211,6 +210,10 @@ function btnChecked(curBtn) {
       firstBtn.textContent == curBtn.textContent &&
       firstBtn.id != curBtn.id
     ) {
+      firstBtn.classList.remove("unsolved");
+      firstBtn.classList.add("solved");
+      curBtn.classList.remove("unsolved");
+      curBtn.classList.add("solved");
       firstBtn = null;
       secondClick = false;
       solved += 2;
