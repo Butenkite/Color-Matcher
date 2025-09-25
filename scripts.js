@@ -1,31 +1,81 @@
 let easyBtn = document.getElementById("easy-btn");
 let mediumBtn = document.getElementById("medium-btn");
 let hardBtn = document.getElementById("hard-btn");
+let resetBtn = document.getElementById("reset-btn");
 const gameTable = document.getElementById("game-table");
 
-function letterLogicEasy() {
+function letterLogic(difficulty) {
   let possibleLetters = [
+    // This is the worst thing I've ever made LOL
+    "A",
     "A",
     "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "A",
     "B",
     "C",
+    "C",
+    "D",
     "D",
     "E",
+    "E",
+    "F",
     "F",
     "G",
+    "G",
     "H",
+    "H",
+    "I",
+    "I",
+    "J",
+    "J",
+    "K",
+    "K",
+    "L",
+    "L",
+    "M",
+    "M",
+    "N",
+    "N",
+    "O",
+    "O",
+    "P",
+    "P",
+    "Q",
+    "Q",
+    "R",
+    "R",
+    "S",
+    "S",
+    "T",
+    "T",
+    "U",
+    "U",
+    "V",
+    "V",
+    "W",
+    "W",
+    "X",
+    "X",
+    "Y",
+    "Y",
+    "Z",
+    "Z",
+    "1",
+    "1",
+    "2",
+    "2",
+    "3",
+    "3",
+    "4",
+    "4",
+    "5",
+    "5",
+    "6",
+    "6",
   ];
   let selected = [];
   let letters = [];
-  while (selected.length <= 15) {
-    let random = Math.floor(Math.random() * 16);
+  while (selected.length <= difficulty * difficulty - 1) {
+    let random = Math.floor(Math.random() * difficulty * difficulty);
     if (!selected.includes(random)) {
       selected.push(random);
     }
@@ -33,30 +83,7 @@ function letterLogicEasy() {
   selected.forEach((number) => {
     letters.push(possibleLetters[number]);
   });
-  console.log(letters);
-}
-
-function letterLogicMedium() {
-  let possibleLetters = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-  ];
+  return letters;
 }
 
 function letterLogicHard() {}
@@ -79,25 +106,27 @@ window.addEventListener("load", () => {
 });
 
 function resetBtnFunc() {
-  console.log("reset btn");
   easyBtn.style.display = "inline";
   mediumBtn.style.display = "inline";
   hardBtn.style.display = "inline";
 }
 
 function generateTable(difficulty) {
-  console.log(difficulty);
+  letterArray = [];
+  letterPos = 0;
   gameTable.textContent = "";
   easyBtn.style.display = "none";
   mediumBtn.style.display = "none";
   hardBtn.style.display = "none";
   resetBtn.style.display = "inline";
 
+  letterArray = letterLogic(difficulty);
+
   for (let i = 0; i < difficulty; i++) {
     let newRow = document.createElement("TR");
-    for (let i = 0; i < difficulty; i++) {
+    for (let j = 0; j < difficulty; j++) {
       let cell = document.createElement("TD");
-      cell.textContent = "Test";
+      cell.textContent = letterArray[letterPos++];
       newRow.appendChild(cell);
     }
     gameTable.appendChild(newRow);
