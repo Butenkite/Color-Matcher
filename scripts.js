@@ -3,6 +3,8 @@ let mediumBtn = document.getElementById("medium-btn");
 let hardBtn = document.getElementById("hard-btn");
 let resetBtn = document.getElementById("reset-btn");
 const gameTable = document.getElementById("game-table");
+let secondClick = false;
+let firstBtn = null;
 
 function letterLogic(difficulty) {
   let possibleLetters = [
@@ -107,6 +109,7 @@ function resetBtnFunc() {
   easyBtn.style.display = "inline";
   mediumBtn.style.display = "inline";
   hardBtn.style.display = "inline";
+  gameTable.textContent = "";
 }
 
 function generateTable(difficulty) {
@@ -126,18 +129,43 @@ function generateTable(difficulty) {
       let cell = document.createElement("td");
 
       let btn = document.createElement("button");
+      btn.id = letterPos;
       btn.textContent = letterArray[letterPos++];
+
       btn.classList.add("btn");
       btn.classList.add("grid-btn");
 
       btn.addEventListener("click", () => {
-        console.log("Clicked:", btn.textContent);
+        console.log("Clicked:", btn);
         btn.style.color = "black";
+        btnChecked(btn);
       });
 
       cell.appendChild(btn);
       newRow.appendChild(cell);
     }
     gameTable.appendChild(newRow);
+  }
+}
+
+function btnChecked(curBtn) {
+  if (!secondClick) {
+    secondClick = true;
+    firstBtn = curBtn;
+  } else {
+    console.log(firstBtn);
+    if (firstBtn.textContent != curBtn.textContent) {
+      gameTable.disable = true;
+      setTimeout(() => {
+        firstBtn.style.color = "rgb(216, 216, 216)";
+        curBtn.style.color = "rgb(216, 216, 216)";
+        firstBtn.firstBtn = null;
+        secondClick = false;
+        gameTable.disable = false;
+      }, 500);
+    } else {
+      firstBtn = null;
+      secondClick = false;
+    }
   }
 }
