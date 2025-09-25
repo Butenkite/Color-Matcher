@@ -184,7 +184,10 @@ function btnChecked(curBtn) {
           button.disabled = false;
         });
       }, 500);
-    } else {
+    } else if (
+      firstBtn.textContent == curBtn.textContent &&
+      firstBtn.id != curBtn.id
+    ) {
       firstBtn = null;
       secondClick = false;
       solved += 2;
