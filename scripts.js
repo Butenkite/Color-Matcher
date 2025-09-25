@@ -169,20 +169,27 @@ function btnChecked(curBtn) {
   } else {
     console.log(firstBtn);
     if (firstBtn.textContent != curBtn.textContent) {
-      gameTable.disable = true;
+      const allBtn = gameTable.querySelectorAll(".grid-btn");
+
+      allBtn.forEach((button) => {
+        button.disabled = true;
+      });
+
       setTimeout(() => {
         firstBtn.style.color = "rgb(216, 216, 216)";
         curBtn.style.color = "rgb(216, 216, 216)";
         firstBtn.firstBtn = null;
         secondClick = false;
-        gameTable.disable = false;
+        allBtn.forEach((button) => {
+          button.disabled = false;
+        });
       }, 500);
     } else {
       firstBtn = null;
       secondClick = false;
       solved += 2;
-      if(totalNeeded == solved){
-        gameTable.style.backgroundColor = "rgba(94, 170, 92, 1)"
+      if (totalNeeded == solved) {
+        gameTable.style.backgroundColor = "rgba(94, 170, 92, 1)";
       }
     }
   }
